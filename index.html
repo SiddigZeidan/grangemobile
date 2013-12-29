@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>GrangeMobile</title>
+
+	<meta name="GrangeMobile" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	
+<!--locationing script-->
+	
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+<!--Youtube-->
+<script type="text/javascript" src="http://swfobject.googlecode.com/svn/trunk/swfobject/swfobject.js"></script>
+
+
+	<link rel="stylesheet" href="_/css/jquery.mobile.css" />
+	<link rel="stylesheet" href="_/css/themes/grangemobile.min.css" />
+	<script src="_/js/jquery.js"></script>
+	<script src="_/js/jquery.mobile.js"></script>
+
+	<script src="_/js/myscript.js"></script>
+
+
+          <script>
+        
+$(document).ready (function(){
+        	$.getJSON('../php/json-data-lecturers.php', function(data) {
+				$.each(data.lecturers, function(index, lecturer) {
+  					$('#lecturerData').append('<li>' + lecturer.firstName+ ' '+ lecturer.lastName+ '<li><a href="mailto:' + lecturer.email+ '">' + lecturer.email+ '</a></li><li>Module No. 1: '+ lecturer.moduleNo1+ '</li><li>Module No. 2: '+ lecturer.moduleNo2+'</li></li>');
+				}); //end of loop
+				$("#lecturerData").listview("refresh");
+        	}); //end of JSON call
+    	}); //end of function to populate nested list
+
+	
+		
+		$(document).ready (function(){
+        	$.getJSON('../php/json-data-students.php', function(data) {
+				$.each(data.students, function(index, student) {
+  					$('#studentData').append('<li>' + student.firstName+ ' '+ student.lastName+ '<li> Module No.1  ' + student.moduleNo1 +'</li> <li> Module No.2 '+ student.moduleNo2 +' </li> <li> Student ID '+ student.studentID +' </li></li>');
+				}); //end of loop
+				$("#studentData").listview("refresh");
+        	}); //end of JSON call
+    	}); //end of function to populate nested list
+
+		
+		
+        
+		
+		$(document).ready (function(){
+        	$.getJSON('../php/json-data-modules.php', function(data) {
+				$.each(data.modules, function(index, module) {
+  					$('#moduleData').append('<li>' + module.moduleNo+ ' '+ module.moduleName+ '<li> Credits for Module  ' + module.credits +'</li> <li> Website for module '+ module.website +' </li> <li> Room Number '+ module.room +' </li></li>');
+				}); //end of loop
+				$("#moduleData").listview("refresh");
+        	}); //end of JSON call
+    	}); //end of function to populate nested list
+
+		
+		
+        </script>
+        
+ 	
+
+	
+	</head>
+
+	<!-- Main page-->
+	<body onLoad="initialize()">
+		<div id="home" data-role = "page" 
+		data-title = "Grange Mobile: Home"
+		data-theme = "a">
+			<div data-role = "header">
+				<h1>Grange Mobile </h1>
+				
+			</div>
+	
+	
+	
+			<div style="text-align: center;"><img src="images/aungier-street.gif" ALT="image"></div>
+            <div data-role = "controlgroup">
+        
+        
+                <a href = "#updates" 
+            data-transition = "flip" 
+            data-role = "button">
+             Updates </a>
+            
+        
+            <a href = "#mydit" 
+            data-transition = "flip" 
+            data-role = "button">
+             My DIT </a>
+            
+        
+            <a href = "#media" 
+            data-transition = "flip" 
+            data-role = "button">
+			Media </a>
+             
+             <a href = "#location" 
+            data-transition = "flip" 
+            data-role = "button">
+             Find My Location </a>
+            
+            </div>
+        
+            </div>
+    
+
+
+			<!-- Updates Page-->
+
+			<div id="updates" data-role = "page" 
+            data-title = "Grange Mobile: Updates"
+			data-theme = "a">
+            <div data-role = "header">
+                    <h1>Grange Mobile Home </h1>
+                    <a href = "#home" data-icon = "home"> Home </a>
+                    <a href = "#mydit" data-icon = "arrow-r"> My DIT </a>
+                </div>
+            <p>Welcome the The Updates</p>
+           
+			
+			<a class="twitter-timeline" href="https://twitter.com/DITNews" data-widget-id="337152178672267265">Tweets by @DITNews</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+	<div data-role = "footer"
+				 data-position = "fixed">
+					<div data-role = "navbar">
+        <ul>
+							<li>    <a href = "#home" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon = "Home">
+							 Home </a>	</li>
+							
+						
+							<li>	<a href = "#mydit" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon = "info">	
+							My DIT </a>		</li>
+							
+						
+							<li>	<a href = "#media" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon="star">
+							Media </a>		</li>
+							 
+							<li>	 <a href = "#location" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon="grid">
+							 Find My Location </a>	</li>
+							
+			</ul>
+			
+			</div>
+            </div>
+		<!-- content -->
+         
+            </div>
+		<!--- MY DIT PAGE--->
+		<div id="mydit" data-role = "page" 
+		data-title = "Grange Mobile: My DIT">
+		
+		
+		
+		<div data-role = "header">
+				<h1>Grange Mobile Home </h1>
+				<a href = "#home" data-icon = "home"> Home </a>
+				<a href = "#mydit" data-icon = "arrow-r"> My DIT </a>
+		
+		
+				  <div data-role = "footer"
+					 data-position = "fixed">
+						<div data-role = "navbar">
+			<ul>
+								<li>    <a href = "#home" 
+								data-transition = "flip" 
+								data-role = "button"
+								data-icon = "Home">
+								 Home </a>	</li>
+								
+							
+							<li>	<a href = "#mydit" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon = "info">	
+							My DIT </a>		</li>
+							
+						
+							<li>	<a href = "#media" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon="star">
+							Media </a>		</li>
+							 
+							<li>	 <a href = "#location" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon="grid">
+							 Find My Location </a>	</li>
+							
+			</ul>
+	
+	
+			
+			</div>
+    
+            </div>
+    
+        
+		</div>
+	
+
+<!--- Lecturers List--->
+         <div data-role="collapsible">
+                <h3>Show Lecturers</h3>
+   <div data-role="content">
+		<ul data-role="listview" id="lecturerData">
+    
+	    </ul>
+		
+	</div> <!-- close content --> 
+	</div>
+	
+	
+	
+	<!--- Students List-->
+	   
+        <div data-role="collapsible">        
+				<h3> Show Students </h3>
+		<div data-role="content">
+		<ul data-role="listview" id="studentData">
+    
+	    </ul>
+		
+		<!-- close content --> 
+	  </div>
+	  </div>	
+	
+	<!--- Modules List-->
+	
+	
+	  <div data-role="collapsible">        
+				<h3> Show Modules </h3>
+		<div data-role="content">
+		<ul data-role="listview" id="moduleData">
+    
+	    </ul>
+		
+		<!-- close content --> 
+	  </div>
+	  </div>	
+	</div>
+	
+	
+	
+	<!-- Meida page-->
+	
+	
+	<div id="media" data-role = "page" 
+	data-title = "Grange Mobile: Media Page">
+	<div data-role = "header">
+			<h1>Grange Mobile Home </h1>
+			<a href = "#home" data-icon = "home"> Home </a>
+			<a href = "#mydit" data-icon = "arrow-r"> My DIT </a>
+		</div>
+	<p>Welcome the media</p>
+	<a href = "#home" 
+	data-transition="pop"
+	data-role = "button"> Home </a>
+	
+	
+<div id="playerContainer" style="width: 20em; height: 250px; float: left;">
+    <object id="player"></object>
+</div>
+<div id="videos2"></div>
+<script 
+    type="text/javascript" 
+    src="http://gdata.youtube.com/feeds/users/DITcampusLife/uploads?alt=json-in-script&callback=showMyVideos2&max-results=5">
+</script>
+
+<!---<video width="640" height="354" controls>
+	<source src="media\500 Days of summer.mp4" type="video/mp4"> -->
+	
+	
+	  <div data-role = "footer"
+				 data-position = "fixed">
+					<div data-role = "navbar">
+        <ul>
+							<li>    <a href = "#home" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon = "Home">
+							 Home </a>	</li>
+							
+						
+							<li>	<a href = "#mydit" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon = "info">	
+							My DIT </a>		</li>
+							
+						
+							<li>	<a href = "#media" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon="star">
+							Media </a>		</li>
+							 
+							<li>	 <a href = "#location" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon="grid">
+							 Find My Location </a>	</li>
+							
+			</ul>
+			
+			</div>
+            </div>
+        
+	
+	</div>
+	
+
+<!-- Location Page-->
+
+			
+<div data-role="page" id="location" data-add-back-btn="true">
+
+<div data-role = "header">
+			<h1>Grange Mobile Home </h1>
+			<a href = "#home" data-icon = "home"> Home </a>
+			<a href = "#mydit" data-icon = "arrow-r"> My DIT </a>
+		</div>
+
+<div data-role="content">
+			<div id="map_canvas" style="width:100%; height:300px">
+			</div>
+					<form action="#" onSubmit="calcRoute();return false;" id="routeForm">
+  					<label>
+    					From: <br />
+    							<input type="text" id="routeStart" value="Dublin, Ireland">
+          <a href="#" class="autoLink" data-role="button">Use current location: <span>not found</span></a>
+ 				 </label>
+       			 <label>
+    				To: <br />
+   						 <input type="text" id="routeEnd" value="Aungier Street, Dublin">
+  						</label>
+  								<label><input type="radio" name="travelMode" value="DRIVING" checked /> Driving</label>
+ 							 <label><input type="radio" name="travelMode" value="WALKING" /> Walking</label>
+  							<input type="submit" value="Calculate route">
+ 					 <div id="directionsPanel">
+ 								 <!--Enter a starting point and click "Calculate route".-->
+					</div>
+</form>
+
+
+  <div data-role = "footer"
+				 data-position = "fixed">
+					<div data-role = "navbar">
+        <ul>
+							<li>    <a href = "#home" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon = "Home">
+							 Home </a>	</li>
+							
+						
+							<li>	<a href = "#mydit" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon = "info">	
+							My DIT </a>		</li>
+							
+						
+							<li>	<a href = "#media" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon="star">
+							Media </a>		</li>
+							 
+							<li>	 <a href = "#location" 
+							data-transition = "flip" 
+							data-role = "button"
+							data-icon="grid">
+							 Find My Location </a>	</li>
+							
+			</ul>
+			
+			</div>
+            </div>
+
+</div>
+	
+</body>
+</html>
